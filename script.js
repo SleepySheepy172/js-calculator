@@ -13,6 +13,8 @@ for (var i = 0; i < number.length; i++) {
         if (display.innerHTML === "0") {
             display.innerHTML = "";
         }
+        // add number to display
+        // use oppNum to show last btn pressed was a number
         display.innerHTML += e.target.innerHTML;
         oppNum = false;
     });
@@ -30,7 +32,17 @@ for (var i = 0; i < operator.length; i++) {
             display.innerHTML =
                 display.innerHTML.slice(0, -1) + e.target.innerHTML;
             oppNum = true;
-            // add a check to see if numbers contain more than one decimal point
+            // check if number contains a decimal point before adding one
+        } else if (e.target.innerHTML === ".") {
+            var inputString = display.innerHTML.split(/(\+|\-|×|÷)/);
+            if (/(\d*[.]\d*)/.test(inputString[inputString.length - 1])) {
+                console.log("only one decimal point per number allowed");
+            } else {
+                display.innerHTML += e.target.innerHTML;
+                oppNum = true;
+            }
+            // add operator to display
+            // log that an operator was pressed last
         } else {
             display.innerHTML += e.target.innerHTML;
             oppNum = true;
