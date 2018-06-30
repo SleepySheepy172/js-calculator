@@ -3,6 +3,7 @@ var number = document.querySelectorAll(".num"); // number buttons
 var operator = document.querySelectorAll(".operator"); // operator buttons
 var result = document.getElementById("equals"); // equal button
 var clear = document.getElementById("clear"); // clear button
+var del = document.getElementById("delete"); // delete button
 var oppNum = false;
 var resultDisplayed = false;
 
@@ -54,6 +55,18 @@ for (var i = 0; i < operator.length; i++) {
 equals.addEventListener("click", function() {
     var currentInput = display.innerHTML;
     check(currentInput);
+});
+
+// Add event listener to delete last character entered
+del.addEventListener("click", function() {
+    if (display.innerHTML === "0") {
+        // do nothing
+    } else if (display.innerHTML.length <= 1) {
+        display.innerHTML = display.innerHTML.slice(0, -1);
+        display.innerHTML = "0";
+    } else {
+        display.innerHTML = display.innerHTML.slice(0, -1);
+    }
 });
 
 // clear input when clear element is clicked
