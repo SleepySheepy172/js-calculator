@@ -10,14 +10,20 @@ var resultDisplayed = false;
 // loop through all buttons with class = num to add event listeners
 for (var i = 0; i < number.length; i++) {
     number[i].addEventListener("click", function(e) {
-        // remove original 0 in display
-        if (display.innerHTML === "0") {
+        // remove original 0 in display and replace
+        // replace a result with current number
+        if (
+            display.innerHTML === "0" ||
+            (resultDisplayed === true && oppNum === false)
+        ) {
             display.innerHTML = "";
         }
         // add number to display
         // use oppNum to show last btn pressed was a number
         display.innerHTML += e.target.innerHTML;
         oppNum = false;
+        resultDisplayed = false;
+        check();
     });
 }
 
@@ -52,9 +58,14 @@ for (var i = 0; i < operator.length; i++) {
 }
 
 // add event listener for "equal" button
-equals.addEventListener("click", function() {
-    var currentInput = display.innerHTML;
-    check(currentInput);
+result.addEventListener("click", function() {
+    var currentInput = display.innerHTML.replace(/×/g, "*").replace(/÷/g, "/");
+    display.innerHTML = eval(currentInput);
+    // apparently eval() has major security issues
+    // TODO: create own similar function from scratch
+    resultDisplayed = true;
+    console.log(currentInput);
+    check();
 });
 
 // Add event listener to delete last character entered
@@ -67,9 +78,23 @@ del.addEventListener("click", function() {
     } else {
         display.innerHTML = display.innerHTML.slice(0, -1);
     }
+    resultDisplayed = false;
+    check();
 });
+
+// TODO: fix bug with delete btn and oppNum switch
+// if you delete "5" from "5+5" oppNum stays as false
+// allowing double operators
 
 // clear input when clear element is clicked
 clear.addEventListener("click", function() {
     display.innerHTML = "0";
+    resultDisplayed = false;
+    check();
 });
+
+function check() {
+    console.log(display.innerHTML);
+    console.log(oppNum);
+    console.log(resultDisplayed);
+}

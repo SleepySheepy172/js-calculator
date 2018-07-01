@@ -22,9 +22,14 @@ body {
 .input {
   grid-column: 1/-1;
   padding: 10px;
-  display: flex;
   align-items: center;
-  justify-content: flex-end;
+  text-align: end;
+  overflow: scroll;
+  font-size: 2em;
+  color: #ffffff;
+  border-radius: 10px;
+  border: 3px solid darkslategrey;
+  background-color: royalblue;
 }
 
 .calculator > button {
@@ -32,14 +37,6 @@ body {
   color: #ffffff;
   border-radius: 10px;
   border: 2px solid rgb(51, 116, 116);
-}
-
-.calculator > div {
-  font-size: 2em;
-  color: #ffffff;
-  border-radius: 10px;
-  border: 3px solid darkslategrey;
-  background-color: royalblue;
 }
 
 .num {
@@ -58,3 +55,6 @@ body {
 #delete {
   background-color: lightseagreen;
 }
+#clear{
+  background-color: lightseagreen;
+ }
